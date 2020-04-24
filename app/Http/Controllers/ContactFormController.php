@@ -137,6 +137,19 @@ class ContactFormController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $contact = ContactForm::find($id);
+
+        $contact->your_name = $request->input('your_name');
+        $contact->title = $request->input('title');
+        $contact->email = $request->input('email');
+        $contact->url = $request->input('url');
+        $contact->gender = $request->input('gender');
+        $contact->age = $request->input('age');
+        $contact->contact = $request->input('contact');
+        // ContactFormのデータベースの各カラム(your_nameなど)に入力された($requestで送られてきている)your_nameを代入している
+        $contact->save();
+        // saveで保存している
+        return redirect('contact/index');
     }
 
     /**
