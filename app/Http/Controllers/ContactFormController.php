@@ -161,5 +161,9 @@ class ContactFormController extends Controller
     public function destroy($id)
     {
         //
+        $contact = ContactForm::find($id);
+        $contact->delete();
+
+        return redirect('contact/index');
     }
 }
