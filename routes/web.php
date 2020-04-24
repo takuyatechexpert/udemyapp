@@ -28,6 +28,8 @@ Route::group(['prefix' => 'contact', 'middleware' => 'auth'], function() {
     // railsではnewアクション
     Route::post('store','ContactFormController@store')->name('contact.store');
     // railsではcreate
+    Route::get('show/{id}','ContactFormController@show')->name('contact.show');
+    Route::get('edit/{id}','ContactFormController@edit')->name('contact.edit');
 
 });
 
