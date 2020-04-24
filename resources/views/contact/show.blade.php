@@ -22,14 +22,29 @@
                     {{$gender}}
                     {{$age}}
                     {{$contact->contact}}
-                      <form method="GET" action="{{route('contact.edit', ['id'=>$contact->id])}}">
+                    <form method="GET" action="{{route('contact.edit', ['id'=>$contact->id])}}">
                         @csrf
+                        <input type="submit" value="変更する" class="btn btn-info  mt-2">
+                    </form>
 
-                      <input type="submit" value="変更する" class="btn btn-info">
+                    <form method="POST" action="{{route('contact.destroy', ['id'=>$contact->id])}}" id="delete_{{$contact->id}}">
+                        {{-- jsの為にdが必要 --}}
+                        @csrf
+                        <a href="#" class="btn btn-danger mt-2" data-id="{{$contact->id}}" onClick="deletePost(this);">削除する</a>
                     </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<script>
+
+    function deletePost(e) {
+        'use strict'
+        if (confirm('本当に削除していいですか?')) {
+            document.getElementById('delete_' + e.dataset.id).submit();
+        }
+    }
+</script>
 @endsection
