@@ -30,6 +30,8 @@ Route::group(['prefix' => 'contact', 'middleware' => 'auth'], function() {
     // railsではcreate
     Route::get('show/{id}','ContactFormController@show')->name('contact.show');
     Route::get('edit/{id}','ContactFormController@edit')->name('contact.edit');
+    Route::post('update/{id}','ContactFormController@update')->name('contact.update');
+
 
 });
 

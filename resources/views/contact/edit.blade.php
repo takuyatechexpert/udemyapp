@@ -15,7 +15,7 @@
                     @endif
 
                     showです！
-                    <form method="POST" action="">
+                    <form method="POST" action="{{route('contact.update', ['id'=> $contact->id])}}">
                         @csrf
 
                         氏名
@@ -31,24 +31,24 @@
                         <input type="url" name="url" value="{{$contact->url}}">
                         <br>
                         性別
-                        <input type="radio" name="gender" @if($contact->gender === 0) checked @endif>男性</input>
-                        <input type="radio" name="gender" @if($contact->gender === 1) checked @endif>女性</input>
+                        <input type="radio" name="gender" value="0" @if($contact->gender === 0) checked @endif>男性</input>
+                        <input type="radio" name="gender" value="1" @if($contact->gender === 1) checked @endif>女性</input>
                         <br>
                         年齢
                         <select name="age">
-                          <option value="">選択してください</option>
-                          <option value="1" @if($contact->age === 1) selected @endif>~19歳</option>
-                          <option value="2" @if($contact->age === 2) selected @endif>20~29歳</option>
-                          <option value="3" @if($contact->age === 3) selected @endif>30~39歳</option>
-                          <option value="4" @if($contact->age === 4) selected @endif>40~49歳</option>
-                          <option value="5" @if($contact->age === 5) selected @endif>50~59歳</option>
-                          <option value="6" @if($contact->age === 6) selected @endif>~60歳~</option>
+                            <option value="">選択してください</option>
+                            <option value="1" @if($contact->age === 1) selected @endif>~19歳</option>
+                            <option value="2" @if($contact->age === 2) selected @endif>20~29歳</option>
+                            <option value="3" @if($contact->age === 3) selected @endif>30~39歳</option>
+                            <option value="4" @if($contact->age === 4) selected @endif>40~49歳</option>
+                            <option value="5" @if($contact->age === 5) selected @endif>50~59歳</option>
+                            <option value="6" @if($contact->age === 6) selected @endif>~60歳~</option>
                         </select>
                         <br>
                         お問い合わせ内容
                         <textarea name="contact">{{$contact->contact}}</textarea>
                         <br>
-                      <input type="submit" value="更新する" class="btn btn-info">
+                        <input type="submit" value="更新する" class="btn btn-info">
                     </form>
                 </div>
             </div>
