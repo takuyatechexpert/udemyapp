@@ -14,6 +14,20 @@
                         </div>
                     @endif
 
+                    {{-- エラーメッセージが出る様に設定している
+                    Requestと言うlaravelの機能を使用している別ファイルを用意する
+                    日本語で出力する為にresources/lang/jaに日本語用メッセージファイルを追加している
+                    単語をカスタムする際はresources/lang/jaのvalidation.phpに記述する --}}
+                    @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    @endif
+
                     createです！
                       <form method="POST" action="{{route("contact.store")}}">
                         @csrf
