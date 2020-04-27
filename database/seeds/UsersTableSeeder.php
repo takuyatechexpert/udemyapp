@@ -16,6 +16,7 @@ class UsersTableSeeder extends Seeder
             'name' => Str::random(10),
             'email' => Str::random(10).'@gmail.com',
             'password' => Hash::make('password'),
+            // seederを使う際はDatabaseSeeder.phpに記述が必要
         ]);
     }
 }
