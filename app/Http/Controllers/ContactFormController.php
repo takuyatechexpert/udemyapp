@@ -16,18 +16,46 @@ class ContactFormController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
+    // search機能のためにrequestが引数として必要
     {
+        $search = $request->input('search');
+        // inputタグのsearchを引っ張っている
+
         //エロクアント or マッパーと言うらしい
         // $contact = ContactForm::all();
 
-        // クエリビルダと言う
-        $contacts = DB::table('contact_forms')
+        // // クエリビルダと言う
+        // $contacts = DB::table('contact_forms')
+        // // ここはdb名で良い
+        //           ->select('id', 'your_name', 'title', 'created_at')
+        //           ->orderBy('id', 'asc')
+        //           ->paginate(20);
+        //         //   paginateで取得する個数を指定できる
+
+
+        // 検索機能用の記述
+        $query = DB::table('contact_forms');
         // ここはdb名で良い
-                  ->select('id', 'your_name', 'title', 'created_at')
-                  ->orderBy('id', 'asc')
-                  ->paginate(20);
-                //   paginateで取得する個数を指定できる
+
+        if($search !== null){
+            // 全角スペースを半角に
+            $search_split = mb_convert_kana($search, 's');
+
+            // 空白で区切る
+            $search_split2 = preg_split('/[\s]/', $search_split,-1,PREG_SPLIT_NO_EMPTY);
+
+            // 単語をループで回す
+            foreach($search_split2 as $value)
+            {
+                $query->where('your_name', 'like', '%'.$value.'%');
+            }
+        };
+        $query->select('id', 'your_name', 'title', 'created_at');
+        $query->orderBy('id', 'asc');
+        $contacts = $query->paginate(20);
+        // paginateで取得する個数を指定できる
+        // 最後にcontactsに入れている
 
         return view('contact/index', compact('contacts'));
     }

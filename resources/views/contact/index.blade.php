@@ -13,8 +13,15 @@
                             {{ session('status') }}
                         </div>
                     @endif
+
                     <form method="GET" action="{{ route('contact.create')}}">
                       <input type="submit" value="新規登録" class="btn btn-info">
+                    </form>
+
+                    <form method="GET" action="{{ route('contact.index')}}" class="form-inline my-2 my-lg-0">
+                        @csrf
+                      <input class="form-control mr-sm-2" type="text" name="search" placeholder="Search" aria-label="Search">
+                      <input type="submit" class="btn btn-outline-success my-2 my-sm-0" value="検索する">
                     </form>
                     <br>
                     <table class="table">
