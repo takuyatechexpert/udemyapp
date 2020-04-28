@@ -39,6 +39,8 @@
                         @endforeach
                       </tbody>
                     </table>
+                    {{ $contacts->links() }}
+                    {{-- ページネイトを表示することができる --}}
                 </div>
             </div>
         </div>
